@@ -14,7 +14,7 @@ import json
 
 # 根据操作系统指定工作目录，使代码在linux和windows都能运行。
 if system() == 'Linux':
-    work_dir = "/usr/share/rss"
+    work_dir = "/usr/share/rssgen"
 elif system() == 'Windows':
     work_dir = "."
 else:
