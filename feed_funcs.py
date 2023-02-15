@@ -15,13 +15,16 @@ import json
 # 根据操作系统指定工作目录，使代码在linux和windows都能运行。
 if system() == 'Linux':
     work_dir = "/usr/share/rssgen"
+    chromedriver_path = /usr/share/rssgen/chromedriver-linux/chromedriver  # chromedriver的路径
 elif system() == 'Windows':
     work_dir = "."
+    chromedriver_path = "./chromedriver-windows/chromedriver"  # chromedriver的路径
+    
 else:
     print("waring： platform.system is not linux or windows")
     work_dir = "."
 
-chromedriver_path = work_dir+'/chromedriver'  # chromedriver的路径
+
 
 feeds_dir = work_dir + "/feeds/"   # feed 的存放目录
 feeds_url = "http://rss.catigerose.fun/feeds/"  # feed是 存放目录的url
