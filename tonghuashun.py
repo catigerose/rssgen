@@ -5,8 +5,9 @@ from datetime import datetime
 if __name__ == '__main__':
 
     id_list =  [231729,273399,241263,241737,225389,268767,263711,238420,215408]
-    feed_titles=["光大期货","中信建投期货","平安期货","长城证券期货","徽商期货","广州期货","华创期货","钱多多团队","南华期货"]
-    feed_descriptions=feed_titles
+  
+    feed_titles=[x+"-同花顺投顾" for x in ["光大期货","中信建投期货","平安期货","长城证券期货","徽商期货","广州期货","华创期货","钱多多团队","南华期货"] ]
+    feed_descriptions=[x+"-同花顺投顾平台，http://t.10jqka.com.cn/newcircle/" for x in ["光大期货","中信建投期货","平安期货","长城证券期货","徽商期货","广州期货","华创期货","钱多多团队","南华期货"] ]
     feed_names=[str(x)+".xml" for x in id_list]
 
 
