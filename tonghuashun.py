@@ -32,7 +32,7 @@ if __name__ == '__main__':
             guid =news_url
             if guid not in guids:             
                 news_title = li.find("a").find("div",class_="post-title").get_text()  # 新闻的标题
-                news_detail = news_title
+                news_detail = news_title 
 
                 new_nums += 1
                 titles.append(news_title)
