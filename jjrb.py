@@ -75,7 +75,7 @@ if __name__ == '__main__':
                         links.append(news_url)
                         guids.append(guid)
                         updateds.append(datetime.now(tz))
-                    publisheds.append(datetime.now(tz))
+                        publisheds.append(datetime.now(tz))
     truc = min(old_nums, new_nums)  # 保证不漏掉新的内容，没有feed文件则新的全部写入，及限制entry数目
     # guids 唯一标记了entry，默认使用news_urls,news如无url，需要修改为news_titles
     fg = gen_fg(website_url, feed_title, feed_description, feed_url, titles,
