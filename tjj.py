@@ -20,14 +20,15 @@ if __name__ == '__main__':
     
     news_list.reverse()  # 新的news排在列表后面  
 
-    print(news_list[-1])
+    
     for news in news_list:
         news_url =website_url +news.a.attrs['href'][2:]
         guid = news_url
 
         if guid not in guids:             
             news_title = news.a.attrs['title'] # 新闻的标题
-            news_detail = get_soup(news_url).find("div",class_="TRS_Editor").decode() 
+            news_url_base = website_url+news.a.attrs['href'].split("/")[1]+"/"
+            news_detail = get_soup(news_url).find("div",class_="TRS_Editor").replace('src="./',news_url_base).decode() 
 
 
             
