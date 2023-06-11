@@ -4,7 +4,7 @@ from datetime import datetime
 if __name__ == '__main__':
 
     
-    feed_title = "国家统计局-数据"  # feed的标题，会显示在feed阅读器中
+    feed_title = "最新发布-国家统计局"  # feed的标题，会显示在feed阅读器中
     feed_description = "国家统计局数据-最新发布"  # feed的描述
     feed_name =  "tjj.xml"  # feed xml文件的的名字
     website_url = 'http://www.stats.gov.cn/sj/zxfb/'  # 要爬取的页面
