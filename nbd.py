@@ -44,6 +44,7 @@ if __name__ == '__main__':
         if guid not in guids:             
             news_title = news.a.get_text()  # 新闻的标题
             news_detail = get_content(news_url)
+            print(news_title)
 
             
                       

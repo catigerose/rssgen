@@ -1,9 +1,7 @@
 
-
-
 from feed_funcs import gen_fg, feeds_url, feeds_dir, get_entrys, tz, get_json
-
 from datetime import datetime
+
 
 if __name__ == '__main__':
 
@@ -18,33 +16,32 @@ if __name__ == '__main__':
     titles, contents, links, guids, updateds, publisheds = get_entrys( feed_path)
     new_nums = 0
     old_nums = len(guids)
-    
-  
+     
 
     
-    url="https://news.futunn.com/main/live-list?page=0&page_size=50"
+    url="https://news.futunn.com/news-site-api/main/get-flash-list?pageSize=50"
    
     data = get_json(url)
     
-    news_list = data['data']['list']
+    
+    news_list = data['data']['data']["news"]
+    
     
    
     news_list.reverse()  # 新的news排在列表后面  
     for news in news_list:
         
-        news_url = "https://news.futunn.com/flash/" + str(news["idx"])
+        news_url = news["detailUrl"]
         guid = news_url
         news_detail = news["content"]
-        pub_time =datetime.fromtimestamp(news["timestamp"], tz) 
+        pub_time =datetime.fromtimestamp(int(news["time"]), tz) 
         
         news_title = news["title"]
         if news_title == "":
-            news_title =  news_detail
-      
+            news_title =  news_detail 
     
         
-     
-        
+            
         
         
         if guid not in guids:          
