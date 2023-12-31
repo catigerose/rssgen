@@ -14,8 +14,8 @@ import json
 
 # 根据操作系统指定工作目录，使代码在linux和windows都能运行。
 if system() == 'Linux':
-    work_dir = "/home/catigerose/rssgen"
-    chromedriver_path = "/home/catigerose/rssgen/chromedriver-linux/chromedriver" # chromedriver的路径
+    work_dir = "/usr/share/rssgen"
+    chromedriver_path = "/usr/share/chromedriver-linux64/chromedriver" # chromedriver的路径
 elif system() == 'Windows':
     work_dir = "."
     chromedriver_path = "./chromedriver-windows/chromedriver"  # chromedriver的路径

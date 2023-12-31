@@ -1,7 +1,9 @@
 
-from feed_funcs import gen_fg, feeds_url, feeds_dir, get_entrys, tz, get_json
-from datetime import datetime
 
+
+from feed_funcs import get_soup,gen_fg, feeds_url, feeds_dir, get_entrys, tz, get_json
+import json
+from datetime import datetime
 
 if __name__ == '__main__':
 
@@ -16,32 +18,38 @@ if __name__ == '__main__':
     titles, contents, links, guids, updateds, publisheds = get_entrys( feed_path)
     new_nums = 0
     old_nums = len(guids)
-     
+    
+  
 
     
-    url="https://news.futunn.com/news-site-api/main/get-flash-list?pageSize=50"
    
-    data = get_json(url)
+    url = "https://news.futunn.com/news-site-api/main/get-flash-list?pageSize=30"
+ 
+   
+    soup = get_soup(url,1)
     
+    pre = soup.body.pre.get_text() 
     
-    news_list = data['data']['data']["news"]
+    res = json.loads(pre)
     
-    
+    news_list = res['data']['data']["news"]
    
     news_list.reverse()  # 新的news排在列表后面  
     for news in news_list:
         
-        news_url = news["detailUrl"]
+        news_url = "https://news.futunn.com/flash/" + str(news["id"])
         guid = news_url
         news_detail = news["content"]
         pub_time =datetime.fromtimestamp(int(news["time"]), tz) 
         
         news_title = news["title"]
         if news_title == "":
-            news_title =  news_detail 
+            news_title =  news_detail
+      
     
         
-            
+     
+        
         
         
         if guid not in guids:          
@@ -64,3 +72,8 @@ if __name__ == '__main__':
                 publisheds,
                 truc)
     fg.atom_file(feed_path)  # Write the ATOM feed to a file
+
+
+    
+   
+  

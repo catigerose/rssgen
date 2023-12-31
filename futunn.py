@@ -4,14 +4,14 @@ from datetime import datetime
 # 该函数获取详情页的新闻内容
 def get_content(news_url):
 
-    detail_soup = get_soup(news_url)   # 构建beautifulsoup实例
+    detail_soup = get_soup(news_url,1)   # 构建beautifulsoup实例
     if detail_soup.find("div", id="content"):  # 获取新闻内容详情
         news_detail = detail_soup.find("div", id="content").decode()
     else:
         news_detail = detail_soup.body.decode()  # 直接将详情页body做为新闻详情
 
-    if detail_soup.find("div", class_="ftEditor"):  # 获取新闻内容详情
-        source = detail_soup.find("div", class_="ftEditor").get_text()
+    if detail_soup.find("p", class_="ftEditor"):  # 获取新闻内容详情
+        source = detail_soup.find("p", class_="ftEditor").get_text()
     else:
         source = "未显示来源"  # 直接将详情页body做为新闻详情
     import time
@@ -37,18 +37,19 @@ if __name__ == '__main__':
     old_nums = len(guids) 
 
     soup = get_soup(website_url,1)  # 网页的内容，返回bs4的soup文件
+    
 
     # 找到或精确 items位置  ，防止抓到其它版面内容
-    news_list = soup.find_all("li", class_="news-li")
+    news_list = soup.find("div",class_="market-wrap").find_all("a", class_="market-item list-item")
 
 
     news_list.reverse()  # 新的news排在列表后面  
     for news in news_list:
-        news_url = news.a.attrs['href']  # 详情页的url
+        news_url = news.attrs['href']  # 详情页的url
         guid = news_url
 
         if guid not in guids:             
-            news_title = news.a.div.h3.get_text()  # 新闻的标题
+            news_title = news.h2.get_text()  # 新闻的标题
             news_detail, source = get_content(news_url)
     
             # 过滤一些报道

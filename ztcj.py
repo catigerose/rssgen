@@ -29,7 +29,7 @@ if __name__ == '__main__':
     new_nums = 0
     old_nums = len(guids) 
     
-    soup = get_soup(website_url)  # 网页的内容，返回bs4的soup文件
+    soup = get_soup(website_url,1)  # 网页的内容，返回bs4的soup文件
     news_list = soup.find(
         "div", class_="home-list-scroll").find_all("div", class_="info-item-content")
 
