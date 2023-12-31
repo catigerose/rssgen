@@ -6,4 +6,3 @@ lib64
 pyvenv.cfg
 __pycache__/
 *.xml
-feed_funcs.cpython-311.pyc
