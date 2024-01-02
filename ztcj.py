@@ -43,8 +43,8 @@ if __name__ == '__main__':
 
         if guid not in guids:             
             news_title = news.div.a.span.get_text()  # 新闻的标题
-            news_detail = get_text(news_url)
-
+            # news_detail = get_text(news_url)
+            news_detail = news_title
             
                       
             new_nums += 1
