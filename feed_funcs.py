@@ -15,10 +15,10 @@ import json
 # 根据操作系统指定工作目录，使代码在linux和windows都能运行。
 if system() == 'Linux':
     work_dir = "/usr/share/rssgen"
-    chromedriver_path = "/usr/share/chromedriver-linux64/chromedriver" # chromedriver的路径
+    # chromedriver_path = "/usr/share/chromedriver-linux64/chromedriver" # chromedriver的路径
 elif system() == 'Windows':
     work_dir = "."
-    chromedriver_path = "./chromedriver-windows/chromedriver"  # chromedriver的路径
+    # chromedriver_path = "./chromedriver-windows/chromedriver"  # chromedriver的路径
     
 else:
     print("waring： platform.system is not linux or windows")
@@ -47,7 +47,8 @@ def get_soup(url, is_dynamic=False):
 
         # 函数更新，使用service传参数，解决警告 DeprecationWarning: executable_path has been deprecated, please pass in a Service object
         s = Service(chromedriver_path)
-        driver = Chrome(service=s, options=options)  # 新建driver
+        # driver = Chrome(service=s, options=options)  # 新建driver
+        driver = Chrome(options=options)  # 新建driver
         driver.maximize_window()  # 最大化窗口
 
         driver.get(url)  # 获取页面内容
