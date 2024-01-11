@@ -46,7 +46,7 @@ def get_soup(url, is_dynamic=False):
         options.add_argument('--user-agent=%s' % user_agent)
 
         # 函数更新，使用service传参数，解决警告 DeprecationWarning: executable_path has been deprecated, please pass in a Service object
-        s = Service(chromedriver_path)
+        # s = Service(chromedriver_path)
         # driver = Chrome(service=s, options=options)  # 新建driver
         driver = Chrome(options=options)  # 新建driver
         driver.maximize_window()  # 最大化窗口
