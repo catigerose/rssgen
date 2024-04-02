@@ -18,23 +18,25 @@ if __name__ == '__main__':
             feed_path)
         new_nums = 0
         old_nums = len(guids)
-
         soup = get_soup(website_url, 1).find(
-            "section", id="leftColumn")  # 网页的内容，返回bs4的soup文件
-        news_list = soup.find_all(
-            "article", class_="js-article-item articleItem")  # 找到或精确 items位置
+            "div", class_="min-w-0").find("ul")  
+        news_list = soup.find_all ("li",class_="list_list__item__dwS6E !mt-0 border-t border-solid border-[#E6E9EB] py-6")  
+        # print(news_list[-1])      
+
         
         news_list.reverse()  # 新的news排在列表后面
-        for news in news_list:
+        for news0 in news_list:
+            news = news0.find("article").find("div",class_="news-analysis-v2_content__z0iLP w-full text-xs sm:flex-1")
+            # print(news)
             news_url = "https://cn.investing.com" + \
                 news.a.attrs['href']  # 详情页的url
             guid = news_url
 
             if guid not in guids:
-                news_title = news.div.a.get_text()  # 新闻的标题
+                news_title = news.a.get_text()  # 新闻的标题
                 # print(news_title)
                 #news_detail = get_soup(news_url,True, chromedriver_path).find("div", class_="WYSIWYG articlePage").decode()
-                news_detail = news.div.get_text()
+                news_detail = news.p.get_text()
 
                 new_nums += 1
                 titles.append(news_title)
