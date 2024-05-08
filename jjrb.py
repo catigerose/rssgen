@@ -1,6 +1,6 @@
 from feed_funcs import get_soup, gen_fg, feeds_url, feeds_dir, get_entrys, tz
 from datetime import datetime
-from datetime import date
+from datetime import date, timedelta
 
 if __name__ == '__main__':
 
@@ -16,8 +16,8 @@ if __name__ == '__main__':
     new_nums = 0
     old_nums = len(guids)
 
-    # 1. 获取今天的日期（年，月，日）
-    today = date.today()
+    # 1. 获取今天的日期（年，月，日）,网页改版，改成获取昨天的日期
+    today = date.today()- timedelta(days=1)
     year = today.year
     month = str(today.month).zfill(2)
     day = str(today.day).zfill(2)
