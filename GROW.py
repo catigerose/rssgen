@@ -18,7 +18,7 @@ if __name__ == '__main__':
     
     news_list = get_soup('https://growinvestment.group/home-2/',1).find("main",id="main").find_all("article")[:3]
     
-    print(news_list)
+    # print(news_list)
     news_list.reverse()  # 新的news排在列表后面 
     for news in news_list:
         news_url =news.header.h2.a.attrs['href']
