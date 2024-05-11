@@ -16,19 +16,20 @@ if __name__ == '__main__':
     old_nums = len(guids) 
     
     
-    news_list = get_soup('https://growinvestment.group/home-2/').find("main",id="main").find_all("article")
+    news_list = get_soup('https://growinvestment.group/home-2/',1).find("main",id="main").find_all("article")[:3]
     
-    news_list.reverse()  # 新的news排在列表后面  
+    print(news_list)
+    news_list.reverse()  # 新的news排在列表后面 
     for news in news_list:
         news_url =news.header.h2.a.attrs['href']
         guid = news_url
 
         if guid not in guids:             
             news_title = news.header.h2.a.get_text()  # 新闻的标题
-            news_detail = news.div.ul.find_all("li")[0].get_text()  
-            for li in news.div.ul.find_all("li"):
+            news_detail = news.find('div',class_="entry-content").ul.find("li").get_text()  
+            '''for li in news.div.ul.find_all("li"):
                 news_detail +=  "\n"
-                news_detail +=  li.get_text()  
+                news_detail +=  li.get_text()  '''
 
             
                       
