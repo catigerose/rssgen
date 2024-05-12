@@ -27,7 +27,7 @@ else:
 
 
 feeds_dir = work_dir + "/feeds/"   # feed 的存放目录
-feeds_url = "http://rss.catigerose.fun/feeds/"  # feed是 存放目录的url
+feeds_url = "http://rss.catigerose.tech/feeds/"  # feed存放目录的url
 
 # 获取 任何网页的内容，返回bs4的soup文件
 tz = timezone('Asia/Shanghai')

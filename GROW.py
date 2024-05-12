@@ -26,12 +26,12 @@ if __name__ == '__main__':
 
         if guid not in guids:             
             news_title = news.header.h2.a.get_text()  # 新闻的标题
-            news_detail = news.find('div',class_="entry-content").ul.find("li").get_text()  
-            '''for li in news.div.ul.find_all("li"):
-                news_detail +=  "\n"
-                news_detail +=  li.get_text()  '''
+            news_detail = news.find('div',class_="entry-content").ul.find("li").get_text() 
+            news_date = news.footer.find("span",class_="posted-on").a.time.get_text() 
 
-            
+            news_title += ' '+  news_date 
+            news_detail += '\n'+ news_date 
+           
                       
             new_nums += 1
             titles.append(news_title)
