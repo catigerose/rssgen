@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     feed_name = "futunn_live.xml"  # feed xml文件的的名字
     website_url = 'https://news.futunn.com/main/live?lang=zh-cn/'  # 要爬取的页面
-    feed_title = "富途牛牛-直播"  # feed的标题，会显示在feed阅读器中
+    feed_title = "富途牛牛-快讯"  # feed的标题，会显示在feed阅读器中
     feed_description = "7×24小时全球实时财经新闻快讯 - 富途牛牛"  # feed的描述
     
     
