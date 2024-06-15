@@ -7,7 +7,7 @@ if __name__ == '__main__':
     feed_title = "数据解读-国家统计局"  # feed的标题，会显示在feed阅读器中
     feed_description = "国家统计局数据-数据解读"  # feed的描述
     feed_name =  "sjjd.xml"  # feed xml文件的的名字
-    website_url = 'http://www.stats.gov.cn/sj/sjjd/'  # 要爬取的页面
+    website_url = 'https://www.stats.gov.cn/sj/sjjd/'  # 要爬取的页面
      
     feed_path = feeds_dir + feed_name
     feed_url = feeds_url + feed_name
@@ -28,7 +28,7 @@ if __name__ == '__main__':
         if guid not in guids:             
             news_title = news.a.attrs['title'] # 新闻的标题
             news_url_base = website_url+news.a.attrs['href'].split("/")[1]+"/"
-            news_detail = get_soup(news_url).find("div",class_="TRS_Editor").decode().replace('src="./',news_url_base) 
+            news_detail = get_soup(news_url).find("div",class_="detail-content").decode().replace('src="./',news_url_base) 
 
 
             
