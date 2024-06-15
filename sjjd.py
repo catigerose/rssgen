@@ -28,7 +28,7 @@ if __name__ == '__main__':
         if guid not in guids:             
             news_title = news.a.attrs['title'] # 新闻的标题
             news_url_base = website_url+news.a.attrs['href'].split("/")[1]+"/"
-            news_detail = get_soup(news_url).find("div",class_="detail-content").decode().replace('src="./',news_url_base) 
+            news_detail = get_soup(news_url).find("div",class_="mobile-news-content").decode().replace('src="./',news_url_base) 
 
 
             

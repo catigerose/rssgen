@@ -31,7 +31,7 @@ if __name__ == '__main__':
             # print(news_title)                    
             news_url_base = website_url+news.a.attrs['href'].split("/")[1]+"/" # 详情页的公共域名
             #print(news_url_base)     
-            news_detail = get_soup(news_url).find("div",class_="detail-content").decode().replace('src="./',news_url_base) # 替换详情页./为的公共域名
+            news_detail = get_soup(news_url).find("div",class_="mobile-news-content").decode().replace('src="./',news_url_base) # 替换详情页./为的公共域名
 
 
             
