@@ -41,6 +41,8 @@ def get_soup(url, is_dynamic=False):
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument("--disable-gpu")
         # options.add_argument("--remote-debugging-port=9222")  # this
+        options.add_experimental_option('prefs', {'intl.accept_languages': 'zh-CN,en,en_US'}) 
+
 
         user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
         options.add_argument('--user-agent=%s' % user_agent)
