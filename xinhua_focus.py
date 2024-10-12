@@ -35,7 +35,7 @@ if __name__ == '__main__':
         "div", id="focusListNews").find_all("li")
 
     news_list.reverse()  # 新的news排在列表后面  
-    for news in news_list:
+    for news in news_list[2:]:
         news_url = news.span.a.attrs['href']  # 详情页的url
         guid = news_url
         
