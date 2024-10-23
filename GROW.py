@@ -27,7 +27,6 @@ if __name__ == '__main__':
         if guid not in guids:     
             
             news_title = news.div.h3.a.get_text()  # 新闻的标题
-            print(news_title) 
             news_detail = get_soup(news_url,1).find("ul",class_="wp-block-list").decode() 
             news_date = news.div.find("div",class_="wp-block-post-date").time.get_text() 
 
