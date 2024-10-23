@@ -4,10 +4,10 @@ from datetime import datetime
 if __name__ == '__main__':
 
     
-    feed_title = "思睿研究"  # feed的标题，会显示在feed阅读器中
+    feed_title = "思睿-中国策略研究"  # feed的标题，会显示在feed阅读器中
     feed_description = "思策为君 睿赢未来"  # feed的描述
     feed_name =  "GROW.xml"  # feed xml文件的的名字
-    website_url = 'https://growinvestment.group/home-2/'  # 要爬取的页面
+    website_url = 'https://grow-investment-group.com/category/%e4%b8%ad%e5%9b%bd%e7%ad%96%e7%95%a5%e7%a0%94%e7%a9%b6/'  # 要爬取的页面
      
     feed_path = feeds_dir + feed_name
     feed_url = feeds_url + feed_name
@@ -16,18 +16,20 @@ if __name__ == '__main__':
     old_nums = len(guids) 
     
     
-    news_list = get_soup('https://growinvestment.group/home-2/',1).find("main",id="main").find_all("article")[:3]
+    news_list = get_soup(website_url,1).find("main").find("ul").find_all("li")
     
     # print(news_list)
     news_list.reverse()  # 新的news排在列表后面 
-    for news in news_list:
-        news_url =news.header.h2.a.attrs['href']
+    for news in news_list:      
+        news_url =news.div.h3.a.attrs['href']
         guid = news_url
 
-        if guid not in guids:             
-            news_title = news.header.h2.a.get_text()  # 新闻的标题
-            news_detail = news.find('div',class_="entry-content").ul.find("li").get_text() 
-            news_date = news.footer.find("span",class_="posted-on").a.time.get_text() 
+        if guid not in guids:     
+            
+            news_title = news.div.h3.a.get_text()  # 新闻的标题
+            print(news_title) 
+            news_detail = get_soup(news_url,1).find("ul",class_="wp-block-list").decode() 
+            news_date = news.div.find("div",class_="wp-block-post-date").time.get_text() 
 
             news_title += ' '+  news_date 
             news_detail += '\n'+ news_date 
