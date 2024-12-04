@@ -1,4 +1,5 @@
 from feed_funcs import get_soup, gen_fg, feeds_url, feeds_dir, get_entrys, tz
+import requests
 from datetime import datetime
 from datetime import date, timedelta
 
@@ -17,26 +18,38 @@ if __name__ == '__main__':
     new_nums = 0
     old_nums = len(guids)
 
-    # 1. 获取今天的日期（年，月，日）,网页改版，改成获取昨天的日期
-    today = date.today() - timedelta(days=1)
-    year = today.year
+    
+    # 先尝试获取今天的新闻，若404，则改为昨天。
+    today = date.today() 
+    yesterday = date.today() - timedelta(days=1)
+
+    today_url = f"http://paper.people.com.cn/rmrb/pc/layout/{today.year}{str(today.month).zfill(2)}/{str(today.day).zfill(2)}/node_01.html"
+    headers = {
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36", }
+    ret = requests.get(today_url, headers=headers, timeout=5)
+    if ret.status_code==404:
+        latest_day = yesterday
+    else:
+        latest_day = today
+
+    # 以下生成、汇总子版面的url，周末排版不一样
+    year =latest_day.year
     month = str(today.month).zfill(2)
     day = str(today.day).zfill(2)
-    weekday = today.weekday()  # 周末排版不一样
-    str_today = '{}-{}/{}/'.format(year, month, day)  # 拼接成url需要的格式
-    # str_today
-    # 2. 获取每个版面的链接
-    domain = "http://paper.people.com.cn/rmrb/html/"+str_today  # url和新闻详情页 前面公用的域名
-    spaces1 = ["01.htm", "02.htm", "03.htm", "04.htm", "05.htm", "06.htm",
-               "07.htm", "08.htm", "09.htm", "10.htm", "14.htm", "17.htm"]  # 工作日新闻版面类别
-    spaces2 = ["01.htm", "02.htm", "03.htm", "04.htm", "05.htm"]  # 周末新闻版面类别
+    weekday =latest_day.weekday()  # 周末排版不一样
+    str_today = '{}{}/{}/'.format(year, month, day)  # 拼接成url需要的格式
+    domain = "http://paper.people.com.cn/rmrb/pc/layout/"+str_today  # url和新闻详情页 前面公用的域名
+    spaces1 = ["01.html", "02.html", "03.html", "04.html", "05.html", "06.html",
+                "07.html", "08.html", "09.html", "10.html", "14.html", "17.html"]  # 工作日新闻版面类别
+    spaces2 = ["01.html", "02.html", "03.html", "04.html", "05.html"]  # 周末新闻版面类别
     if weekday in [5, 6]:
         spaces = spaces2
     else:
         spaces = spaces1
     urls = []
     for space in spaces:
-        urls.append(domain+"nbs.D110000renmrb_" + space)
+        urls.append(domain+"node_" + space)
+
     # 3. 获取新闻内容
     for url0 in urls:
 
