@@ -1,8 +1,19 @@
-from feed_funcs import get_soup, gen_fg, feeds_url, feeds_dir, get_entrys, tz
+from feed_funcs import gen_fg, feeds_url, feeds_dir, get_entrys, tz
 import requests
 from datetime import datetime
 from datetime import date, timedelta
+import requests
+import time
+from bs4 import BeautifulSoup
 
+def get_soup(url):
+        headers = {
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36", }
+        ret = requests.get(url, headers=headers, timeout=5)        
+        ret.encoding = "utf-8"
+        time.sleep(1)
+        soup = BeautifulSoup(ret.text, features="lxml")  # 构建beautifulsoup实例
+        return soup
 
 if __name__ == '__main__':
 
@@ -62,6 +73,8 @@ if __name__ == '__main__':
             for news in news_list:
 
                 news_title = news.get_text()  # 新闻的标题
+                
+                
 
                 # 过滤一些报道
                 filter_strings = ["责编", "图片报道", "广告"]
